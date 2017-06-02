@@ -21,10 +21,17 @@ namespace DynamicsCRMDemoPlugin.ContextComponents
             get { return tracingService; }
         }
         #endregion
-        public IServiceProvider ServiceProvider { get; set; }
+        #region ServiceProvider
+        private IServiceProvider serviceProvider;
+        public IServiceProvider ServiceProvider
+        {
+            get { return serviceProvider; }
+        }
+        #endregion
+
         public PassThroughContext(IServiceProvider sp)
         {
-            ServiceProvider = sp;
+            serviceProvider = sp;
             //Extract the tracing service for use in debugging sandboxed plug-ins.
             tracingService = (ITracingService)sp.GetService(typeof(ITracingService));
         }
