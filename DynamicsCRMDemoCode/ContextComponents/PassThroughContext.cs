@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xrm.Sdk;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,13 +10,23 @@ namespace DynamicsCRMDemoPlugin.ContextComponents
     /// <summary>
     /// This context only keeps the Service Provider in a local var
     /// It is used for BL to pass through the context to the DAL
+    /// Only Tracing Service is available 
     /// </summary>
     public class PassThroughContext
     {
+        #region TracingService
+        private ITracingService tracingService;
+        public ITracingService TracingService
+        {
+            get { return tracingService; }
+        }
+        #endregion
         public IServiceProvider ServiceProvider { get; set; }
         public PassThroughContext(IServiceProvider sp)
         {
             ServiceProvider = sp;
+            //Extract the tracing service for use in debugging sandboxed plug-ins.
+            tracingService = (ITracingService)sp.GetService(typeof(ITracingService));
         }
 
     }

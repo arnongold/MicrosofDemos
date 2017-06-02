@@ -14,7 +14,7 @@ namespace DynamicsCRMDemoPlugin.BusinessLogic.AccountBL
         public AccountBL(PassThroughContext pluginContext) : base(pluginContext) { }
         public ValidationResult ValidateNewAccount(Account accountToValidate)
         {
- 
+            this.pluginContext.TracingService.Trace("Tracing is the only function available in the context");
             AccountDAL dal = new AccountDAL(pluginContext);
             if (dal.IsAccountActive(accountToValidate.Name))
             {
