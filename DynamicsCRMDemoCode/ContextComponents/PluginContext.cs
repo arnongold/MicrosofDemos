@@ -8,113 +8,18 @@ namespace DynamicsCRMDemoPlugin.ContextComponents
 {
     public class PluginContext
     {
-        #region TracingService
-        private ITracingService tracingService;
-        public ITracingService TracingService
-        {
-            get { return tracingService; }
-        }
+        #region Properties
+        public IServiceProvider ServiceProvider { get; private set; }
+        public IOrganizationService OrganizationService { get; private set; }
+        public IPluginExecutionContext PluginExecutionContext { get; private set; }
+        public IServiceEndpointNotificationService NotificationService { get; private set; }
+        public ParameterCollection InputParameters { get; private set; }
+        public ITracingService TracingService { get; private set; }
+        public Entity TargetEntity { get; private set; }
+        public Entity PreImageEntity { get; private set; }
+        public Entity PostImageEntity { get; private set; }
+        public ServiceContext Context { get; private set; }
         #endregion
-        #region InputParameters
-        private ParameterCollection inputParameters;
-        public ParameterCollection InputParameters
-        {
-            get
-            {
-                return inputParameters;
-            }
-        }
-        #endregion
-        #region TargetEntity
-        private Entity targetEntity;
-        public Entity TargetEntity
-        {
-            get
-            {
-                return targetEntity;
-            }
-        }
-        #endregion
-        #region Relationship
-        private Relationship relationship;
-        public Relationship Relationship
-        {
-            get
-            {
-                return relationship;
-            }
-        }
-        #endregion
-        #region RelatedEntities
-        private EntityReferenceCollection relatedEntities;
-        public EntityReferenceCollection RelatedEntities
-        {
-            get
-            {
-                return relatedEntities;
-            }
-        }
-        #endregion
-        #region PreImageEntity
-        private Entity preImageEntity;
-        public Entity PreImageEntity
-        {
-            get
-            {
-                return preImageEntity;
-            }
-        }
-        #endregion
-        #region PostImageEntity
-        private Entity postImageEntity;
-        public Entity PostImageEntity
-        {
-            get
-            {
-                return postImageEntity;
-            }
-        }
-        #endregion
-        #region RelatedTargetEntitiy
-        private EntityReference relatedTargetEntitiy;
-        public EntityReference RelatedTargetEntitiy
-        {
-            get
-            {
-                return relatedTargetEntitiy;
-            }
-        }
-        #endregion
-        #region Assignee
-        private EntityReference assignee;
-        public EntityReference Assignee
-        {
-            get
-            {
-                return assignee;
-            }
-        }
-        #endregion
-        #region OragnizationService
-        private IOrganizationService organiztionService;
-        public IOrganizationService Service
-        {
-            get
-            {
-                return organiztionService;
-            }
-        }
-        #endregion
-        #region ServiceXontext
-        private ServiceContext context;
-        public ServiceContext Context
-        {
-            get
-            {
-                return context;
-            }
-        }
-        #endregion 
 
         #region Constructor
         public PluginContext(IServiceProvider sp)
@@ -124,34 +29,22 @@ namespace DynamicsCRMDemoPlugin.ContextComponents
         public void InitializeContext(IServiceProvider serviceProvider)
         {
             //Extract the tracing service for use in debugging sandboxed plug-ins.
-            tracingService = (ITracingService)serviceProvider.GetService(typeof(ITracingService));
+            TracingService = (ITracingService)serviceProvider.GetService(typeof(ITracingService));
             IOrganizationServiceFactory serviceFactory = (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
             // Obtain the execution context from the service provider.
             IPluginExecutionContext pluginExecutionContext = (IPluginExecutionContext)serviceProvider.GetService(typeof(IPluginExecutionContext));
-            organiztionService = serviceFactory.CreateOrganizationService(pluginExecutionContext.UserId);
-            inputParameters = pluginExecutionContext.InputParameters;
+            OrganizationService = serviceFactory.CreateOrganizationService(pluginExecutionContext.UserId);
+            InputParameters = pluginExecutionContext.InputParameters;
 
             if (pluginExecutionContext.InputParameters.Contains("Target") && pluginExecutionContext.InputParameters["Target"] is Entity)
             {
                 // Obtain the target entity from the input parameters.
-                targetEntity = (Entity)pluginExecutionContext.InputParameters["Target"];
-                preImageEntity = (pluginExecutionContext.PreEntityImages.ContainsKey("PreImage")) ? (Entity)pluginExecutionContext.PreEntityImages["PreImage"] : null;
-                postImageEntity = (pluginExecutionContext.PostEntityImages.ContainsKey("PostImage")) ? (Entity)pluginExecutionContext.PostEntityImages["PostImage"] : null;
+                TargetEntity = (Entity)pluginExecutionContext.InputParameters["Target"];
+                PreImageEntity = (pluginExecutionContext.PreEntityImages.ContainsKey("PreImage")) ? (Entity)pluginExecutionContext.PreEntityImages["PreImage"] : null;
+                PostImageEntity = (pluginExecutionContext.PostEntityImages.ContainsKey("PostImage")) ? (Entity)pluginExecutionContext.PostEntityImages["PostImage"] : null;
             }
 
-            if (pluginExecutionContext.InputParameters.Contains("Relationship") && pluginExecutionContext.InputParameters["Relationship"] is Relationship)
-            {
-                relationship = pluginExecutionContext.InputParameters.ContainsKey("Relationship") ? (Relationship)pluginExecutionContext.InputParameters["Relationship"] : null;
-                relatedEntities = pluginExecutionContext.InputParameters.ContainsKey("RelatedEntities") ? (EntityReferenceCollection)pluginExecutionContext.InputParameters["RelatedEntities"] : null;
-                relatedTargetEntitiy = pluginExecutionContext.InputParameters.ContainsKey("Target") ? (EntityReference)pluginExecutionContext.InputParameters["Target"] : null;
-            }
-
-            if (pluginExecutionContext.InputParameters.Contains("Assignee") && pluginExecutionContext.InputParameters["Assignee"] is EntityReference)
-            {
-                assignee = (EntityReference)pluginExecutionContext.InputParameters["Assignee"];
-                relatedTargetEntitiy = pluginExecutionContext.InputParameters.ContainsKey("Target") ? (EntityReference)pluginExecutionContext.InputParameters["Target"] : null;
-            }
-            context = new ServiceContext(organiztionService);
+            Context = new ServiceContext(OrganizationService);
         }
         #endregion Constructor
 

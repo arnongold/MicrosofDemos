@@ -21,7 +21,7 @@ namespace DynamicsCRMDemoPlugin.ContextComponents.Extensions
                 Assignee = new EntityReference(assignee.LogicalName, assignee.Id),
                 Target = new EntityReference(targetEntity.LogicalName, targetEntity.Id)
             };
-            pluginContext.Service.Execute(assign);
+            pluginContext.OrganizationService.Execute(assign);
         }
 
         public static void Share(this PluginContext pluginContext, EntityReference targetEntity, EntityReference shareWith, AccessRights accessRights)
@@ -37,7 +37,7 @@ namespace DynamicsCRMDemoPlugin.ContextComponents.Extensions
                 Target = targetEntity
             };
 
-            pluginContext.Service.Execute(grantAccessRequest);
+            pluginContext.OrganizationService.Execute(grantAccessRequest);
         }
 
         public static void Associate(this PluginContext pluginContext, string relationshipName, EntityReference entity1, EntityReference entity2)
@@ -46,13 +46,13 @@ namespace DynamicsCRMDemoPlugin.ContextComponents.Extensions
             var relatedEntities = new EntityReferenceCollection();
             relatedEntities.Add(entity2);
 
-            pluginContext.Service.Associate(entity1.LogicalName, entity1.Id, relationship, relatedEntities);
+            pluginContext.OrganizationService.Associate(entity1.LogicalName, entity1.Id, relationship, relatedEntities);
         }
 
         public static void Save(this PluginContext pluginContext, Entity targetEntity)
         {
             pluginContext.Context.UpdateObject(targetEntity);
-            pluginContext.Service.Update(targetEntity);
+            pluginContext.OrganizationService.Update(targetEntity);
         }
 
         public static string GetOptionsetText(this PluginContext pluginContext, Entity entity, IOrganizationService service, string optionsetName, int optionsetValue)
