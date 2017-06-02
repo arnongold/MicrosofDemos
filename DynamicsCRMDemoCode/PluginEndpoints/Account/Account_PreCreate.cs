@@ -10,7 +10,7 @@ using DynamicsCRMDemoPlugin.Model;
 
 namespace DynamicsCRMDemoPlugin.PluginEndpoints
 {
-    public class SamplePlugin : IPlugin
+    public class Account_PreCreate : IPlugin
     {
         public void Execute(IServiceProvider serviceProvider)
         {
