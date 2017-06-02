@@ -8,7 +8,7 @@ namespace DynamicsCRMDemoPlugin.BusinessLogic
 {
     internal class ValidationResult
     {
-        public int ErrorCode { get; set; } = 0;
+        public bool HasError { get; set; } = false;
         public string ErrorDescription { get; set; }
 
     }

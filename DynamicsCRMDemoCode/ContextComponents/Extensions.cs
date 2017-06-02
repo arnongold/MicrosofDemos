@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DynamicsCRMDemoPlugin.ContextComponents;
+using Microsoft.Xrm.Sdk.Messages;
+using Microsoft.Xrm.Sdk.Metadata;
 
 namespace DynamicsCRMDemoPlugin.ContextComponents.Extensions
 {
@@ -52,6 +54,36 @@ namespace DynamicsCRMDemoPlugin.ContextComponents.Extensions
             pluginContext.Context.UpdateObject(targetEntity);
             pluginContext.Service.Update(targetEntity);
         }
+
+        public static string GetOptionsetText(this PluginContext pluginContext, Entity entity, IOrganizationService service, string optionsetName, int optionsetValue)
+        {
+            string optionsetSelectedText = string.Empty;
+            RetrieveOptionSetRequest retrieveOptionSetRequest =
+                new RetrieveOptionSetRequest
+                {
+                    Name = optionsetName
+                };
+
+            // Execute the request.
+            RetrieveOptionSetResponse retrieveOptionSetResponse =
+                (RetrieveOptionSetResponse)service.Execute(retrieveOptionSetRequest);
+
+            // Access the retrieved OptionSetMetadata.
+            OptionSetMetadata retrievedOptionSetMetadata = (OptionSetMetadata)retrieveOptionSetResponse.OptionSetMetadata;
+
+            // Get the current options list for the retrieved attribute.
+            OptionMetadata[] optionList = retrievedOptionSetMetadata.Options.ToArray();
+            foreach (OptionMetadata optionMetadata in optionList)
+            {
+                if (optionMetadata.Value == optionsetValue)
+                {
+                    optionsetSelectedText = optionMetadata.Label.UserLocalizedLabel.Label.ToString();
+                    break;
+                }
+            }
+            return optionsetSelectedText;
+        }
+
     }
-}
+    }
 

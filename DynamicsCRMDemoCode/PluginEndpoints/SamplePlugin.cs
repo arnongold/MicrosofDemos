@@ -14,11 +14,14 @@ namespace DynamicsCRMDemoPlugin.PluginEndpoints
     {
         public void Execute(IServiceProvider serviceProvider)
         {
-            PluginContext context = new PluginContext(serviceProvider);
+            PassThroughContext context = new PassThroughContext(serviceProvider);
             var accountValidator = new AccountBL(context);
 
-            var result = accountValidator.ValidateNewAccount(context.TargetEntity.ToEntity<Account>());
-            if (result.ErrorCode != 0)
+            // only if needed locally - create a full plugin context
+            PluginContext localContext = new PluginContext(serviceProvider);
+            var result = accountValidator.ValidateNewAccount(localContext.TargetEntity.ToEntity<Account>());
+
+            if (result.HasError)
             {
                 throw new InvalidPluginExecutionException(result.ErrorDescription);
             }

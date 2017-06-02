@@ -10,7 +10,7 @@ namespace DynamicsCRMDemoPlugin.DataAccess.AccountDAL
 {
     internal class AccountDAL : BaseDAL
     {
-        public AccountDAL(PluginContext pluginContext) : base(pluginContext) { }
+        public AccountDAL(PassThroughContext pluginContext) : base(pluginContext) { }
 
         public Boolean IsAccountActive(string accountName)
         {

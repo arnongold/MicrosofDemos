@@ -9,8 +9,8 @@ namespace DynamicsCRMDemoPlugin.BusinessLogic
 {
     public abstract class BaseBL
     {
-        protected PluginContext pluginContext;
-        public BaseBL(PluginContext passedPluginContext)
+        protected PassThroughContext pluginContext;
+        public BaseBL(PassThroughContext passedPluginContext)
         {
             this.pluginContext = passedPluginContext;
         }

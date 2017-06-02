@@ -11,7 +11,7 @@ namespace DynamicsCRMDemoPlugin.BusinessLogic.AccountBL
 {
     internal class AccountBL:BaseBL
     {
-        public AccountBL(PluginContext pluginContext) : base(pluginContext) { }
+        public AccountBL(PassThroughContext pluginContext) : base(pluginContext) { }
         public ValidationResult ValidateNewAccount(Account accountToValidate)
         {
  
@@ -20,11 +20,11 @@ namespace DynamicsCRMDemoPlugin.BusinessLogic.AccountBL
             {
                 return new ValidationResult()
                 {
-                    ErrorCode = 123,
+                    HasError = true,
                     ErrorDescription = "Invalid opration on a closed account"
                 };
             }
-            return new ValidationResult() { ErrorCode = 0 } ;
+            return new ValidationResult() {} ;
         }
     }
 }

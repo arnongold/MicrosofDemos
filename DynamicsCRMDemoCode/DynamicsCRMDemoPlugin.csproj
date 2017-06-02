@@ -55,6 +55,7 @@
     <Compile Include="BusinessLogic\BaseBL.cs" />
     <Compile Include="BusinessLogic\ValidationResult.cs" />
     <Compile Include="ContextComponents\Extensions.cs" />
+    <Compile Include="ContextComponents\PassThroughContext.cs" />
     <Compile Include="ContextComponents\PluginContext.cs" />
     <Compile Include="DataAccess\AccountDAL\AccountDAL.cs" />
     <Compile Include="DataAccess\BaseDAL.cs" />
