@@ -10,11 +10,11 @@ namespace DynamicsCRMDemoPlugin.DataAccess.AccountDAL
 {
     internal class AccountDAL : BaseDAL
     {
-        public AccountDAL(PassThroughContext pluginContext) : base(pluginContext) { }
+        public AccountDAL(PassThroughContext passThroughContext) : base(passThroughContext) { }
 
         public Boolean IsAccountActive(string accountName)
         {
-            var accountStatus = pluginContext.Context.AccountSet.First(a => a.Name == accountName).StatusCode;
+            var accountStatus = dataContext.Context.AccountSet.First(a => a.Name == accountName).StatusCode;
             return accountStatus.Value == 0;
         }
     }

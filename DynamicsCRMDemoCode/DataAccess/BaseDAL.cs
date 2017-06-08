@@ -9,10 +9,10 @@ namespace DynamicsCRMDemoPlugin.DataAccess
 {
     abstract class BaseDAL
     {
-        protected PluginContext pluginContext;
+        protected DataAccessContext dataContext;
         public BaseDAL(PassThroughContext passedPluginContext)
         {
-            this.pluginContext = new PluginContext(passedPluginContext.ServiceProvider);
+            this.dataContext = passedPluginContext.ToDataAccessContext();
         }
     }
 }

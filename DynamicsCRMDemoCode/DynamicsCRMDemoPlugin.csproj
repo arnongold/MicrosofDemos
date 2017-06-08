@@ -40,7 +40,11 @@
     <Reference Include="Microsoft.Xrm.Sdk">
       <HintPath>H:\Dynamics CRM\Dynamics365sdk\SDK\Bin\Microsoft.Xrm.Sdk.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Xrm.Sdk.Workflow">
+      <HintPath>D:\Dynamics CRM\SDK\8.2.1  (365)\SDK\Bin\Microsoft.Xrm.Sdk.Workflow.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Activities" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
@@ -54,17 +58,21 @@
     <Compile Include="BusinessLogic\AccountBL\AccountBL.cs" />
     <Compile Include="BusinessLogic\BaseBL.cs" />
     <Compile Include="BusinessLogic\ValidationResult.cs" />
-    <Compile Include="ContextComponents\Extensions.cs" />
-    <Compile Include="ContextComponents\PassThroughContext.cs" />
-    <Compile Include="ContextComponents\PluginContext.cs" />
+    <Compile Include="ContextComponents\DataAccessContext\Extensions.cs" />
+    <Compile Include="ContextComponents\EndPointContext\CustomWorkflowActivityContext.cs" />
+    <Compile Include="ContextComponents\EndPointContext\IEndpointContext.cs" />
+    <Compile Include="ContextComponents\EndPointContext\PluginContext.cs" />
+    <Compile Include="ContextComponents\PassThroughContext\PassThroughContext.cs" />
+    <Compile Include="ContextComponents\DataAccessContext\DataAccessContext.cs" />
     <Compile Include="DataAccess\AccountDAL\AccountDAL.cs" />
     <Compile Include="DataAccess\BaseDAL.cs" />
     <Compile Include="DataModel\generated.cs" />
-    <Compile Include="PluginEndpoints\SamplePlugin.cs" />
+    <Compile Include="PluginEndpoints\Account\Account_PreCreate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DataModel\CrmSvcUtil_GenerateModel.bat" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
