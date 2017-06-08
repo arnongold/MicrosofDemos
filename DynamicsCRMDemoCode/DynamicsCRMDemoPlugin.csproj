@@ -37,11 +37,17 @@
     <Reference Include="Microsoft.Crm.Sdk.Proxy">
       <HintPath>H:\Dynamics CRM\Dynamics365sdk\SDK\Bin\Microsoft.Crm.Sdk.Proxy.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory">
+      <HintPath>D:\Dynamics CRM\SDK\8.2.1  (365)\SDK\Bin\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xrm.Sdk">
       <HintPath>H:\Dynamics CRM\Dynamics365sdk\SDK\Bin\Microsoft.Xrm.Sdk.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Xrm.Sdk.Workflow">
       <HintPath>D:\Dynamics CRM\SDK\8.2.1  (365)\SDK\Bin\Microsoft.Xrm.Sdk.Workflow.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xrm.Tooling.Connector">
+      <HintPath>D:\Dynamics CRM\SDK\8.2.1  (365)\SDK\Bin\Microsoft.Xrm.Tooling.Connector.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Activities" />
@@ -59,9 +65,11 @@
     <Compile Include="BusinessLogic\BaseBL.cs" />
     <Compile Include="BusinessLogic\ValidationResult.cs" />
     <Compile Include="ContextComponents\DataAccessContext\Extensions.cs" />
+    <Compile Include="ContextComponents\EndPointContext\ConsoleTracingService.cs" />
     <Compile Include="ContextComponents\EndPointContext\CustomWorkflowActivityContext.cs" />
     <Compile Include="ContextComponents\EndPointContext\IEndpointContext.cs" />
     <Compile Include="ContextComponents\EndPointContext\PluginContext.cs" />
+    <Compile Include="ContextComponents\EndPointContext\StandAloneContext.cs" />
     <Compile Include="ContextComponents\PassThroughContext\PassThroughContext.cs" />
     <Compile Include="ContextComponents\DataAccessContext\DataAccessContext.cs" />
     <Compile Include="DataAccess\AccountDAL\AccountDAL.cs" />
