@@ -1,0 +1,885 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<helpItems xmlns="http://msh" schema="maml">
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>
+        Get-CrmConnection
+      </command:name>
+      <maml:description>
+        <maml:para>Returns a connection to a Microsoft Dynamics 365 instance.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para></maml:para>
+      </maml:copyright>
+      <command:verb>Get</command:verb>
+      <command:noun>CrmConnection</command:noun>
+      <dev:version></dev:version>
+    </command:details>
+    <maml:description>
+      <maml:para>
+        The Get-CrmConnection cmdlet returns a connection to a Dynamics 365 instance. Upon successful connection to Dynamics 365, it returns an initialized instance of the Microsoft.Xrm.Tooling.CrmServiceClient class.
+        This cmdlet applies to Microsoft Dynamics 365 (Online and on-premises).
+      </maml:para>
+    </maml:description>
+    <!-- Cmdlet syntax section-->
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-CrmConnection</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>ConnectionString</maml:name>
+          <maml:description>
+            <maml:para>
+              Connection string used to connect to Dynamics 365.
+              Valid parameters are:
+
+              Server/Url/ServiceUri/ Service Uri = URL to the CRM API Server
+
+              UserName/User Name/UserId/User Id = User ID to connect to the CRM server
+
+              Password = Password for the user id
+
+              Domain = Domain name for the user id
+
+              HomeRealmUri/Home Realm Uri = Home Realm Url to access the delegated ADFS instance
+
+              AuthType/AuthenticationType = Auth type to use.  Default is AD
+              Valid values are:  AD , Live ,  IFD, Claims, Office365, OAuth
+
+              RequireNewInstance = defaults to true, false to reused an in memory cache
+
+              CientId / AppId / ApplicationId = ID of your oAuth client app.  Required for OAuth Auth Type
+
+              RedirectUri/ReplyUrl = ReplyUrl created as part of the client id registration. Required for OAuth Auth Type
+
+              TokenCacheStorePath = Fully qualified file name to store tokens in for reuse. Optional for OAuth Type
+
+              LoginPrompt = Allow the OAuth system to prompt the UX for login information. Default is Auto
+              Valid values are : Auto , Always , Never , RefreshSession
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>LogWriteDirectory</maml:name>
+          <maml:description>
+            <maml:para>Custom directory location to store the Xrm.Tooling.Connector log files. The directory must already exist, and the user who is running the cmdlet must have Write permission to the directory. You must also use the -Verbose parameter along with the -LogWriteDirectory parameter to be able to store the log files in a custom location.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>MaxCrmConnectionTimeOutMinutes</maml:name>
+          <maml:description>
+            <maml:para>Maximum time in minutes that Xrm.Tooling.Connector will wait for any given Dynamics 365 SDK command to complete. </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>OnLineType</maml:name>
+          <maml:description>
+            <maml:para>Type of online deployment. Valid value is Office365. </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-CrmConnection</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="2">
+          <maml:name>Credential</maml:name>
+          <maml:description>
+            <maml:para>User credential for signing in to Microsoft Dynamics 365. </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="5">
+          <maml:name>DeploymentRegion</maml:name>
+          <maml:description>
+            <maml:para>Geographic region of your Microsoft Dynamics 365 online deployment. Valid values are NorthAmerica, EMEA, APAC, SouthAmerica, Oceania, JPN, CAN, IND, and NorthAmerica2.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="named">
+          <maml:name>OrganizationName</maml:name>
+          <maml:description>
+            <maml:para>Unique or friendly name of the Microsoft Dynamics 365 organization to connect to.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>LogWriteDirectory</maml:name>
+          <maml:description>
+            <maml:para>Custom directory location to store the Xrm.Tooling.Connector log files. The directory must already exist, and the user who is running the cmdlet must have Write permission to the directory. You must also use the -Verbose parameter along with the -LogWriteDirectory parameter to be able to store the log files in a custom location.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>MaxCrmConnectionTimeOutMinutes</maml:name>
+          <maml:description>
+            <maml:para>Maximum time in minutes that Xrm.Tooling.Connector will wait for any given Dynamics 365 SDK command to complete. </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>OnLineType</maml:name>
+          <maml:description>
+            <maml:para>Type of online deployment. Valid value is Office365. </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-CrmConnection</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1">
+          <maml:name>ServerUrl</maml:name>
+          <maml:description>
+            <maml:para>URL of the on-premises Microsoft Dynamics 365 server specified in the following format:  http://&lt;server&gt;:&lt;port&gt;. </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Uri</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="2">
+          <maml:name>Credential</maml:name>
+          <maml:description>
+            <maml:para>User credential for signing in to Microsoft Dynamics 365. </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="3">
+          <maml:name>OrganizationName</maml:name>
+          <maml:description>
+            <maml:para>Unique or friendly name of the Microsoft Dynamics 365 organization to connect to.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="4">
+          <maml:name>HomeRealmUrl</maml:name>
+          <maml:description>
+            <maml:para>URI of the WS-Trust metadata endpoint.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Url</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>LogWriteDirectory</maml:name>
+          <maml:description>
+            <maml:para>Custom directory location to store the Xrm.Tooling.Connector log files. The directory must already exist, and the user who is running the cmdlet must have Write permission to the directory. You must also use the -Verbose parameter along with the -LogWriteDirectory parameter to be able to store the log files in a custom location.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>MaxCrmConnectionTimeOutMinutes</maml:name>
+          <maml:description>
+            <maml:para>Maximum time in minutes that Xrm.Tooling.Connector will wait for any given Dynamics 365 SDK command to complete. </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>OnLineType</maml:name>
+          <maml:description>
+            <maml:para>Type of online deployment. Valid value is Office365. </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <!-- Cmdlet parameter section  -->
+    <command:parameters>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>ConnectionString</maml:name>
+        <maml:description>
+          <maml:para>
+            Connection string used to connect to Dynamics 365.
+            Valid parameters are:
+
+            Server/Url/ServiceUri/ Service Uri = URL to the CRM API Server
+
+            UserName/User Name/UserId/User Id = User ID to connect to the CRM server
+
+            Password = Password for the user id
+
+            Domain = Domain name for the user id
+
+            HomeRealmUri/Home Realm Uri = Home Realm Url to access the delegated ADFS instance
+
+            AuthType/AuthenticationType = Auth type to use.  Default is AD
+            Valid values are:  AD , Live ,  IFD, Claims, Office365, OAuth
+
+            RequireNewInstance = defaults to true, false to reused an in memory cache
+
+            CientId / AppId / ApplicationId = ID of your oAuth client app.  Required for OAuth Auth Type
+
+            RedirectUri/ReplyUrl = ReplyUrl created as part of the client id registration. Required for OAuth Auth Type
+
+            TokenCacheStorePath = Fully qualified file name to store tokens in for reuse. Optional for OAuth Type
+
+            LoginPrompt = Allow the OAuth system to prompt the UX for login information. Default is Auto
+            Valid values are : Auto , Always , Never , RefreshSession
+          </maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="2">
+        <maml:name>Credential</maml:name>
+        <maml:description>
+          <maml:para>User credential for signing in to Microsoft Dynamics 365. </maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
+        <dev:type>
+          <maml:name>PSCredential</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="5">
+        <maml:name>DeploymentRegion</maml:name>
+        <maml:description>
+          <maml:para>Geographic region of your Microsoft Dynamics 365 online deployment. Valid values are NorthAmerica, EMEA, APAC, SouthAmerica, Oceania, JPN, CAN, IND, and NorthAmerica2.</maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="4">
+        <maml:name>HomeRealmUrl</maml:name>
+        <maml:description>
+          <maml:para>URI of the WS-Trust metadata endpoint.</maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Url</command:parameterValue>
+        <dev:type>
+          <maml:name>Url</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>LogWriteDirectory</maml:name>
+        <maml:description>
+          <maml:para>Custom directory location to store the Xrm.Tooling.Connector log files. The directory must already exist, and the user who is running the cmdlet must have Write permission to the directory. You must also use the -Verbose parameter along with the -LogWriteDirectory parameter to be able to store the log files in a custom location.</maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>MaxCrmConnectionTimeOutMinutes</maml:name>
+        <maml:description>
+          <maml:para>Maximum time in minutes that Xrm.Tooling.Connector will wait for any given Dynamics 365 SDK command to complete. </maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        <dev:type>
+          <maml:name>int</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>OnLineType</maml:name>
+        <maml:description>
+          <maml:para>Type of online deployment. Valid value is Office365. </maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="named">
+        <maml:name>OrganizationName</maml:name>
+        <maml:description>
+          <maml:para>Unique or friendly name of the Microsoft Dynamics 365 organization to connect to.</maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1">
+        <maml:name>ServerUrl</maml:name>
+        <maml:description>
+          <maml:para>URL of the on-premises Microsoft Dynamics 365 server specified in the following format:  http://&lt;server&gt;:&lt;port&gt;. </maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Uri</command:parameterValue>
+        <dev:type>
+          <maml:name>Uri</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <!-- Input - Output section-->
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri/>
+          <maml:description />
+        </dev:type>
+        <maml:description>
+          <maml:para>
+            <!-- description  -->
+
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Microsoft.Xrm.Tooling.CrmServiceClient</maml:name>
+          <maml:uri />
+          <maml:description />
+        </dev:type>
+        <maml:description>
+          <maml:para>
+            <!-- description  -->
+
+          </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <!-- Error section-->
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <!-- Notes section  -->
+    <maml:alertSet>
+      <maml:title></maml:title>
+      <maml:alert>
+        <maml:para>
+
+        </maml:para>
+      </maml:alert>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <!-- Example section  -->
+    <command:examples>
+
+      <command:example>
+        <maml:title>
+          -------------------------- EXAMPLE 1 --------------------------
+        </maml:title>
+        <maml:introduction>
+          <maml:para>C:\PS&gt;</maml:para>
+        </maml:introduction>
+        <dev:code>
+          Get-CrmConnection -ConnectionString &quot;AuthType=AD;Url=http://mycrmserver/Contoso;Domain=mycrmserverdom;Username=user1;Password=password&quot;
+
+          IsReady                        : True
+          IsBatchOperationsAvailable     : True
+          Authority                      :
+          OAuthUserId                    :
+          ActiveAuthenticationType       : AD
+          OrganizationServiceProxy       : Microsoft.Xrm.Sdk.Client.OrganizationServiceProxy
+          OrganizationWebProxyClient     :
+          LastCrmError                   : OrganizationWebProxyClient is null
+          LastCrmException               :
+          CrmConnectOrgUriActual         : http://mycrmserver/Contoso/XRMServices/2011/Organization.svc
+          ConnectedOrgFriendlyName       : Contoso
+          ConnectedOrgUniqueName         : Contoso
+          ConnectedOrgPublishedEndpoints : {[WebApplication, http://mycrmserver/Contoso], [OrganizationService, http://mycrmserver/Contoso/XRMServices/2011/Organization.svc],
+          [OrganizationDataService, http://mycrmserver/Contoso/XRMServices/2011/OrganizationData.svc]}
+          ConnectionLockObject           : System.Object
+          ConnectedOrgVersion            : 8.2.0.729
+          CallerId                       : 00000000-0000-0000-0000-000000000000
+          SdkVersionProperty             :
+        </dev:code>
+        <dev:remarks>
+          <maml:para>Description</maml:para>
+          <maml:para>-----------</maml:para>
+          <maml:para>Creates a connection to an on-premises instance of Microsoft Dynamics 365 using the connection string. On successful connection, it returns an initialized instance of Microsoft.Xrm.Tooling.CrmServiceClient.</maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText></command:commandText>
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+
+      <command:example>
+        <maml:title>
+          -------------------------- EXAMPLE 2 --------------------------
+        </maml:title>
+        <maml:introduction>
+          <maml:para>C:\PS&gt;</maml:para>
+        </maml:introduction>
+        <dev:code>
+          Get-CrmConnection -OrganizationName Contoso -ServerUrl http://mycrmserver -Credential $Cred
+
+          IsReady                        : True
+          IsBatchOperationsAvailable     : True
+          Authority                      :
+          OAuthUserId                    :
+          ActiveAuthenticationType       : AD
+          OrganizationServiceProxy       : Microsoft.Xrm.Sdk.Client.OrganizationServiceProxy
+          OrganizationWebProxyClient     :
+          LastCrmError                   : OrganizationWebProxyClient is null
+          LastCrmException               :
+          CrmConnectOrgUriActual         : http://mycrmserver/Contoso/XRMServices/2011/Organization.svc
+          ConnectedOrgFriendlyName       : Contoso
+          ConnectedOrgUniqueName         : Contoso
+          ConnectedOrgPublishedEndpoints : {[WebApplication, http://mycrmserver/Contoso], [OrganizationService, http://mycrmserver/Contoso/XRMServices/2011/Organization.svc],
+          [OrganizationDataService, http://mycrmserver/Contoso/XRMServices/2011/OrganizationData.svc]}
+          ConnectionLockObject           : System.Object
+          ConnectedOrgVersion            : 8.2.0.729
+          CallerId                       : 00000000-0000-0000-0000-000000000000
+          SdkVersionProperty             :
+        </dev:code>
+        <dev:remarks>
+          <maml:para>Description</maml:para>
+          <maml:para>-----------</maml:para>
+          <maml:para>Creates a connection to an on-premises instance of Microsoft Dynamics 365. On successful connection, it returns an initialized instance of Microsoft.Xrm.Tooling.CrmServiceClient.</maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText></command:commandText>
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+
+      <command:example>
+        <maml:title>
+          -------------------------- EXAMPLE 3 --------------------------
+        </maml:title>
+        <maml:introduction>
+          <maml:para>C:\PS&gt;</maml:para>
+        </maml:introduction>
+        <dev:code>
+          Get-CrmConnection -OrganizationName org1 -DeploymentRegion Northamerica -OnLineType Office365 -Credential $Cred
+
+          IsReady                        : True
+          IsBatchOperationsAvailable     : True
+          Authority                      : https://login.windows.net/cff7431e-fzd3-4273-a130-7b7f5007dcd0/oauth2/authorize/
+          OAuthUserId                    : user1@myCrmOnline.onmicrosoft.com
+          ActiveAuthenticationType       : OAuth
+          OrganizationServiceProxy       :
+          OrganizationWebProxyClient     : Microsoft.Xrm.Sdk.WebServiceClient.OrganizationWebProxyClient
+          LastCrmError                   :
+          LastCrmException               :
+          CrmConnectOrgUriActual         : https://mycrmonline.api.crm.dynamics.com/XRMServices/2011/Organization.svc
+          ConnectedOrgFriendlyName       : org1
+          ConnectedOrgUniqueName         : orgc304eba7
+          ConnectedOrgPublishedEndpoints : {[WebApplication, https://mycrmonline.crm.dynamics.com/], [OrganizationService,
+          https://mycrmonline.api.crm.dynamics.com/XRMServices/2011/Organization.svc], [OrganizationDataService,
+          https://mycrmonline.api.crm.dynamics.com/XRMServices/2011/OrganizationData.svc]}
+          ConnectionLockObject           : System.Object
+          ConnectedOrgVersion            : 8.2.0.729
+          CallerId                       : 00000000-0000-0000-0000-000000000000
+          SdkVersionProperty             :
+        </dev:code>
+        <dev:remarks>
+          <maml:para>Description</maml:para>
+          <maml:para>-----------</maml:para>
+          <maml:para>Creates a connection to an online instance of Microsoft Dynamics 365. On successful connection, it returns an initialized instance of Microsoft.Xrm.Tooling.CrmServiceClient.</maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText></command:commandText>
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <!-- Link section  -->
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online version:</maml:linkText>
+        <maml:uri>http://go.microsoft.com/fwlink/?LinkId=397928</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>
+        Get-CrmOrganizations
+      </command:name>
+      <maml:description>
+        <maml:para>Returns a list of Microsoft Dynamics 365 organizations that the current user has access to.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para></maml:para>
+      </maml:copyright>
+      <command:verb>Get</command:verb>
+      <command:noun>CrmOrganizations</command:noun>
+      <dev:version></dev:version>
+    </command:details>
+    <maml:description>
+      <maml:para>
+        The Get-CrmOrganizations cmdlet returns a list of Microsoft Dynamics 365 organizations that the current user has access to.
+        This cmdlet applies to Microsoft Dynamics 365 (Online and on-premises).
+      </maml:para>
+    </maml:description>
+    <!-- Cmdlet syntax section-->
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-CrmOrganizations</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1">
+          <maml:name>ServerUrl</maml:name>
+          <maml:description>
+            <maml:para>URL of the on-premises Microsoft Dynamics 365 server specified in the format http://&lt;server&gt;:&lt;port&gt;.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Uri</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="2">
+          <maml:name>Credential</maml:name>
+          <maml:description>
+            <maml:para>User credential for signing in to Microsoft Dynamics 365.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="5">
+          <maml:name>DeploymentRegion</maml:name>
+          <maml:description>
+            <maml:para>Geographic region of your Microsoft Dynamics 365 online deployment. Valid vales are NorthAmerica, EMEA, APAC, SouthAmerica, Oceania, JPN, CAN, IND, and NorthAmerica2</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>LogWriteDirectory</maml:name>
+          <maml:description>
+            <maml:para>Custom directory location to store the Xrm.Tooling.Connector log files. The directory must already exist, and the user who is running the cmdlet must have Write permission to the directory. You must also use the -Verbose parameter along with the -LogWriteDirectory parameter to be able to store the log files in a custom location.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>MaxCrmConnectionTimeOutMinutes</maml:name>
+          <maml:description>
+            <maml:para>Maximum time in minutes that Xrm.Tooling.Connector will wait for any given Dynamics 365 SDK command to complete. </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>OnLineType</maml:name>
+          <maml:description>
+            <maml:para>Type of online deployment. Valid value is Office365.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-CrmOrganizations</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1">
+          <maml:name>ServerUrl</maml:name>
+          <maml:description>
+            <maml:para>URL of the on-premises Microsoft Dynamics 365 server specified in the format http://&lt;server&gt;:&lt;port&gt;.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Uri</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="2">
+          <maml:name>Credential</maml:name>
+          <maml:description>
+            <maml:para>User credential for signing in to Microsoft Dynamics 365.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="4">
+          <maml:name>HomeRealmUrl</maml:name>
+          <maml:description>
+            <maml:para>
+              URI of the WS-Trust metadata endpoint.
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Url</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>LogWriteDirectory</maml:name>
+          <maml:description>
+            <maml:para>Custom directory location to store the Xrm.Tooling.Connector log files. The directory must already exist, and the user who is running the cmdlet must have Write permission to the directory. You must also use the -Verbose parameter along with the -LogWriteDirectory parameter to be able to store the log files in a custom location.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>MaxCrmConnectionTimeOutMinutes</maml:name>
+          <maml:description>
+            <maml:para>Maximum time in minutes that Xrm.Tooling.Connector will wait for any given Dynamics 365 SDK command to complete. </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>OnLineType</maml:name>
+          <maml:description>
+            <maml:para>Type of online deployment. Valid value is Office365.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <!-- Cmdlet parameter section  -->
+    <command:parameters>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="2">
+        <maml:name>Credential</maml:name>
+        <maml:description>
+          <maml:para>User credential for signing in to Microsoft Dynamics 365.</maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
+        <dev:type>
+          <maml:name>PSCredential</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="5">
+        <maml:name>DeploymentRegion</maml:name>
+        <maml:description>
+          <maml:para>Geographic region of your Microsoft Dynamics 365 online deployment. Valid vales are NorthAmerica, EMEA, APAC, SouthAmerica, Oceania, JPN, CAN, IND, and NorthAmerica2</maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="4">
+        <maml:name>HomeRealmUrl</maml:name>
+        <maml:description>
+          <maml:para>
+            URI of the WS-Trust metadata endpoint.
+          </maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Url</command:parameterValue>
+        <dev:type>
+          <maml:name>Url</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>LogWriteDirectory</maml:name>
+        <maml:description>
+          <maml:para>Custom directory location to store the Xrm.Tooling.Connector log files. The directory must already exist, and the user who is running the cmdlet must have Write permission to the directory. You must also use the -Verbose parameter along with the -LogWriteDirectory parameter to be able to store the log files in a custom location.</maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>MaxCrmConnectionTimeOutMinutes</maml:name>
+        <maml:description>
+          <maml:para>Maximum time in minutes that Xrm.Tooling.Connector will wait for any given Dynamics 365 SDK command to complete. </maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+        <dev:type>
+          <maml:name>int</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>OnLineType</maml:name>
+        <maml:description>
+          <maml:para>Type of online deployment. Valid value is Office365.</maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1">
+        <maml:name>ServerUrl</maml:name>
+        <maml:description>
+          <maml:para>URL of the on-premises Microsoft Dynamics 365 server specified in the format http://&lt;server&gt;:&lt;port&gt;.</maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Uri</command:parameterValue>
+        <dev:type>
+          <maml:name>Uri</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <!-- Input - Output section-->
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri/>
+          <maml:description />
+        </dev:type>
+        <maml:description>
+          <maml:para>
+            <!-- description  -->
+
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Microsoft.Xrm.Sdk.Discovery.OrganizationDetailCollection</maml:name>
+          <maml:uri />
+          <maml:description />
+        </dev:type>
+        <maml:description>
+          <maml:para>
+            <!-- description  -->
+            Returns an initialized array of Organizations that can be used to login to, or null.
+          </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <!-- Error section-->
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <!-- Notes section  -->
+    <maml:alertSet>
+      <maml:title></maml:title>
+      <maml:alert>
+        <maml:para>
+
+        </maml:para>
+      </maml:alert>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <!-- Example section  -->
+    <command:examples>
+
+      <command:example>
+        <maml:title>
+          -------------------------- EXAMPLE 1 --------------------------
+        </maml:title>
+        <maml:introduction>
+          <maml:para>C:\PS&gt;</maml:para>
+        </maml:introduction>
+        <dev:code>
+          Get-CrmOrganizations -ServerUrl http://mycrmserver -Credential $Cred
+
+          DiscoveryServerShortname :
+          DiscoverySeverName       :
+          FriendlyName             : Contoso
+          UniqueName               : Contoso
+          Version                  : 8.2.0.729
+          OrganizationUrl          : http://mycrmserver/Contoso/XRMServices/2011/Organization.svc
+          WebApplicationUrl        : http://mycrmserver/Contoso
+          OrganizationRestUrl      : http://myCrmServer/Contoso/XRMServices/2011/OrganizationData.svc
+          OrganizationWebAPIUrl    : http://mycrmserver/Contoso/api/data/v8.2/
+
+
+          DiscoveryServerShortname :
+          DiscoverySeverName       :
+          FriendlyName             : Fabrikam
+          UniqueName               : Fabrikam
+          Version                  : 8.2.0.729
+          OrganizationUrl          : http://mycrmserver/Fabrikam/XRMServices/2011/Organization.svc
+          WebApplicationUrl        : http://mycrmserver/Fabrikam
+          OrganizationRestUrl      : http://mycrmserver/Fabrikam/XRMServices/2011/OrganizationData.svc
+          OrganizationWebAPIUrl    : http://mycrmserver/Fabrikam/api/data/v8.2/
+        </dev:code>
+        <dev:remarks>
+          <maml:para>Description</maml:para>
+          <maml:para>-----------</maml:para>
+          <maml:para>This example shows how to retrieve the organizations from an on-premises instance of Microsoft Dynamics 365. On successful connection to Microsoft Dynamics 365, the cmdlet returns an initialized list of Microsoft.Xrm.Tooling.Connector.CrmOrganizationInfo objects.</maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText></command:commandText>
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+
+      <command:example>
+        <maml:title>
+          -------------------------- EXAMPLE 2 --------------------------
+        </maml:title>
+        <maml:introduction>
+          <maml:para>C:\PS&gt;</maml:para>
+        </maml:introduction>
+        <dev:code>
+          Get-CrmOrganizations -DeploymentRegion NorthAmerica -OnLineType Office365 -Credential $Cred
+
+          DiscoveryServerShortname : NorthAmerica
+          DiscoverySeverName       : North America
+          FriendlyName             : org1
+          UniqueName               : orgc304eba7
+          Version                  : 8.2.0.729
+          OrganizationUrl          : https://mycrmonline.api.crm.dynamics.com/XRMServices/2011/Organization.svc
+          WebApplicationUrl        : https://mycrmonline.crm.dynamics.com/
+          OrganizationRestUrl      : https://mycrmonline.api.crm.dynamics.com/XRMServices/2011/OrganizationData.svc
+          OrganizationWebAPIUrl    : https://mycrmonline.api.crm.dynamics.com/api/data/v8.2/
+
+
+          DiscoveryServerShortname : NorthAmerica
+          DiscoverySeverName       : North America
+          FriendlyName             : org2
+          UniqueName               : orgc304zpa3
+          Version                  : 8.2.0.729
+          OrganizationUrl          : https://mycrmonline.api.crm.dynamics.com/XRMServices/2011/Organization.svc
+          WebApplicationUrl        : https://mycrmonline.crm.dynamics.com/
+          OrganizationRestUrl      : https://mycrmonline.api.crm.dynamics.com/XRMServices/2011/OrganizationData.svc
+          OrganizationWebAPIUrl    : https://mycrmonline.api.crm.dynamics.com/api/data/v8.2/
+        </dev:code>
+        <dev:remarks>
+          <maml:para>Description</maml:para>
+          <maml:para>-----------</maml:para>
+          <maml:para>This example shows how to retrieve the organizations from an online instance of Microsoft Dynamics 365. On successful connection to Microsoft Dynamics 365, the cmdlet returns an initialized list of Microsoft.Xrm.Tooling.Connector.CrmOrganizationInfo objects.</maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText></command:commandText>
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <!-- Link section  -->
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online version:</maml:linkText>
+        <maml:uri>http://go.microsoft.com/fwlink/?LinkId=397927</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+</helpItems>

@@ -1,0 +1,549 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<helpItems xmlns="http://msh" schema="maml">
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>
+        Get-CrmPackages
+      </command:name>
+      <maml:description>
+        <maml:para>Returns a list of available packages (package name and package assembly location) that can be deployed to Microsoft Dynamics 365. </maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para></maml:para>
+      </maml:copyright>
+      <command:verb>Get</command:verb>
+      <command:noun>CrmPackages</command:noun>
+      <dev:version></dev:version>
+    </command:details>
+    <maml:description>
+      <maml:para>
+        The Get-CrmPackages cmdlet returns a list of packages (package name and package assembly location). The cmdlet can also return information about a specific package if you specify the package name as a cmdlet parameter. A package can contain the following items: Microsoft Dynamics 365 solution files, files or exported data files from the Configuration Migration tool, custom code that can run during or after the package is deployed to the Microsoft Dynamics 365 instance, and HTML content specific to the package that can display at the beginning and end of the package deployment process. This HTML content can be useful to provide a description of the solutions and files that are deployed in the package.
+
+        This cmdlet applies to Microsoft Dynamics 365 (Online and on-premises).
+
+      </maml:para>
+    </maml:description>
+    <!-- Cmdlet syntax section-->
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-CrmPackages</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByPropertyName)" position="1">
+          <maml:name>PackageDirectory</maml:name>
+          <maml:description>
+            <maml:para>Directory where a package or packages can be found.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByPropertyName)" position="1">
+          <maml:name>PackageName</maml:name>
+          <maml:description>
+            <maml:para>Name of the assembly (.dll) that contains the package definition.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>LogWriteDirectory</maml:name>
+          <maml:description>
+            <maml:para>Custom directory location to store the Package Deployer log files. The directory must already exist, and the user who is running the cmdlet must have Write permission to the directory. You must also use the -Verbose parameter along with the -LogWriteDirectory parameter to be able to store the log files in a custom location.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <!-- Cmdlet parameter section  -->
+    <command:parameters>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>LogWriteDirectory</maml:name>
+        <maml:description>
+          <maml:para>Custom directory location to store the Package Deployer log files. The directory must already exist, and the user who is running the cmdlet must have Write permission to the directory. You must also use the -Verbose parameter along with the -LogWriteDirectory parameter to be able to store the log files in a custom location.</maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByPropertyName)" position="1">
+        <maml:name>PackageDirectory</maml:name>
+        <maml:description>
+          <maml:para>Directory where a package or packages can be found.</maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByPropertyName)" position="1">
+        <maml:name>PackageName</maml:name>
+        <maml:description>
+          <maml:para>Name of the assembly (.dll) that contains the package definition.</maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <!-- Input - Output section-->
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri/>
+          <maml:description />
+        </dev:type>
+        <maml:description>
+          <maml:para>
+            <!-- description  -->
+
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>List&lt;PackageInfoClass&gt;</maml:name>
+          <maml:uri />
+          <maml:description />
+        </dev:type>
+        <maml:description>
+          <maml:para>
+            <!-- description  -->
+            This cmdlet exports a list of PackageInfo objects, The short name of this object can be used as input to the Import-CrmPackage cmdlet.
+          </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <!-- Error section-->
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <!-- Notes section  -->
+    <maml:alertSet>
+      <maml:title></maml:title>
+      <maml:alert>
+        <maml:para>
+
+        </maml:para>
+      </maml:alert>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <!-- Example section  -->
+    <command:examples>
+
+      <command:example>
+        <maml:title>
+          -------------------------- EXAMPLE 1 --------------------------
+        </maml:title>
+        <maml:introduction>
+          <maml:para>C:\PS&gt;</maml:para>
+        </maml:introduction>
+        <dev:code>
+          Get-CrmPackages -PackageDirectory c:\CRM\SDK\Tools\PackageDeployer
+
+          PackageLongName         : Preview Community Portal Package
+          PackageShortName        : Preview Community Portal Package
+          PackageDescription      : Includes solutions and data for the Preview Community Portal
+          PackageFullName         : Adxstudio.Preview_CommunityPortal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+          PacakgeAssemblyLocation : c:\CRM\SDK\Tools\PackageDeployer\ADXSTUDIO.PREVIEW_COMMUNITYPORTAL.dll
+
+          PackageLongName         : Customer Care Accelerator for Dynamics CRM 2013 - Reference implementation demo
+          PackageShortName        : CCA Reference Demo
+          PackageDescription      : Customer Care Accelerator for Dynamics CRM 2013 - Reference implementation demo
+          PackageFullName         : CCADemoExtension, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35
+          PacakgeAssemblyLocation : c:\CRM\SDK\Tools\PackageDeployer\CCADEMOEXTENSION.dll
+        </dev:code>
+        <dev:remarks>
+          <maml:para>Description</maml:para>
+          <maml:para>-----------</maml:para>
+          <maml:para>This example returns a list of packages available for import in the specified directory (in this case, c:\CRM\SDK\Tools\PackageDeployer).</maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText></command:commandText>
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+
+      <command:example>
+        <maml:title>
+          -------------------------- EXAMPLE 2 --------------------------
+        </maml:title>
+        <maml:introduction>
+          <maml:para>C:\PS&gt;</maml:para>
+        </maml:introduction>
+        <dev:code>
+          Get-CrmPackages -PackageDirectory c:\CRM\SDK\Tools\PackageDeployer -PackageName ADXSTUDIO.PREVIEW_COMMUNITYPORTAL.dll
+
+          PackageLongName         : Preview Community Portal Package
+          PackageShortName        : Preview Community Portal Package
+          PackageDescription      : Includes solutions and data for the Preview Community Portal
+          PackageFullName         : Adxstudio.Preview_CommunityPortal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+          PacakgeAssemblyLocation : c:\CRM\SDK\Tools\PackageDeployer\ADXSTUDIO.PREVIEW_COMMUNITYPORTAL.dll
+        </dev:code>
+        <dev:remarks>
+          <maml:para>Description</maml:para>
+          <maml:para>-----------</maml:para>
+          <maml:para>This example displays information about a package available in the specified directory (in this case, c:\CRM\SDK\Tools\PackageDeployer). To display information about a package, you must specify the name of the assembly (in this case ADXSTUDIO.PREVIEW_COMMUNITYPORTAL.dll) in the -PackageName parameter that contains the package definition. </maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText></command:commandText>
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <!-- Link section  -->
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online version:</maml:linkText>
+        <maml:uri>http://go.microsoft.com/fwlink/?LinkId=397937</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>
+        Import-CrmPackage
+      </command:name>
+      <maml:description>
+        <maml:para>Imports a package to a Microsoft Dynamics 365 instance. </maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para></maml:para>
+      </maml:copyright>
+      <command:verb>Import</command:verb>
+      <command:noun>CrmPackages</command:noun>
+      <dev:version></dev:version>
+    </command:details>
+    <maml:description>
+      <maml:para>
+        The Import-CrmPackage cmdlet imports a package to a Dynamics 365 instance. A package can contain Dynamics 365 solution files, files or exported data files from the Configuration Migration tool, custom code that can run during or after the package is deployed to the Dynamics 365 instance, and HTML content specific to the package that can display at the beginning and end of the package deployment process. The HTML content can be useful to provide a description of the solutions and files that are deployed in the package.
+
+        This cmdlet applies to Microsoft Dynamics 365 (Online and on-premises).
+
+      </maml:para>
+    </maml:description>
+    <!-- Cmdlet syntax section-->
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Import-CrmPackage</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByPropertyName)" position="1">
+          <maml:name>CrmConnection</maml:name>
+          <maml:description>
+            <maml:para>Connection object to Microsoft Dynamics 365 instance. This is an initialized instance of the Microsoft.Xrm.Tooling.Connector class.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">CrmServiceClient</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByPropertyName)" position="2">
+          <maml:name>PackageName</maml:name>
+          <maml:description>
+            <maml:para>Name of the assembly (.dll) that contains the package definition.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByPropertyName)" position="3">
+          <maml:name>PackageDirectory</maml:name>
+          <maml:description>
+            <maml:para>Directory where a package or packages can be found.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByPropertyName)" position="4">
+          <maml:name>UnpackFilesDirectory</maml:name>
+          <maml:description>
+            <maml:para>
+              Directory where the files are extracted to. If your package doesn't have files that need to be unpacked or extracted, you don't have to specify this parameter.
+
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>AllowCustomCode</maml:name>
+          <maml:description>
+            <maml:para>For Internal use only.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>LogWriteDirectory</maml:name>
+          <maml:description>
+            <maml:para>Custom directory location to store the Package Deployer log files. The directory must already exist, and the user who is running the cmdlet must have Write permission to the directory. You must also use the -Verbose parameter along with the -LogWriteDirectory parameter to be able to store the log files in a custom location.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>RuntimePackageSettings</maml:name>
+          <maml:description>
+            <maml:para>
+              Used to pass data at runtime to the package that is being deployed in a key=value format delimited by pipe (|): key1=value1|key2=value2|key3=value3.
+              For example: LCID=1033|SkipChecks=true
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+          <maml:name>TimeOut</maml:name>
+          <maml:description>
+            <maml:para>
+              The timespan notation for the timeout value of a package deployment operation.
+              The format applied is &quot;[d:]h:mm:ss&quot;, where d is optional
+              For example:
+              1:30:00 means wait up to 1 hr and 30 mins for the package deployment operation to complete.
+              1:14:30:00 means wait up to 1 day, 14 hrs, and 30 mins for the package deployment operation to complete.
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <!-- Cmdlet parameter section  -->
+    <command:parameters>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>AllowCustomCode</maml:name>
+        <maml:description>
+          <maml:para>For Internal use only.</maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByPropertyName)" position="1">
+        <maml:name>CrmConnection</maml:name>
+        <maml:description>
+          <maml:para>Connection object to Microsoft Dynamics 365 instance. This is an initialized instance of the Microsoft.Xrm.Tooling.Connector class.</maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">CrmServiceClient</command:parameterValue>
+        <dev:type>
+          <maml:name>CrmServiceClient</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>LogWriteDirectory</maml:name>
+        <maml:description>
+          <maml:para>Custom directory location to store the Package Deployer log files. The directory must already exist, and the user who is running the cmdlet must have Write permission to the directory. You must also use the -Verbose parameter along with the -LogWriteDirectory parameter to be able to store the log files in a custom location.</maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByPropertyName)" position="3">
+        <maml:name>PackageDirectory</maml:name>
+        <maml:description>
+          <maml:para>Directory where a package or packages can be found.</maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByPropertyName)" position="2">
+        <maml:name>PackageName</maml:name>
+        <maml:description>
+          <maml:para>Name of the assembly (.dll) that contains the package definition.</maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>RuntimePackageSettings</maml:name>
+        <maml:description>
+          <maml:para>
+            Used to pass data at runtime to the package that is being deployed in a key=value format delimited by pipe (|): key1=value1|key2=value2|key3=value3.
+            For example: LCID=1033|SkipChecks=true
+          </maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named">
+        <maml:name>TimeOut</maml:name>
+        <maml:description>
+          <maml:para>
+            The timespan notation for the timeout value of a package deployment operation.
+            The format applied is &quot;[d:]h:mm:ss&quot;, where d is optional
+            For example:
+            1:30:00 means wait up to 1 hr and 30 mins for the package deployment operation to complete.
+            1:14:30:00 means wait up to 1 day, 14 hrs, and 30 mins for the package deployment operation to complete.
+          </maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByPropertyName)" position="4">
+        <maml:name>UnpackFilesDirectory</maml:name>
+        <maml:description>
+          <maml:para>
+            Directory where the files are extracted to. If your package doesn't have files that need to be unpacked or extracted, you don't have to specify this parameter.
+
+          </maml:para>
+
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+        <dev:type>
+          <maml:name>string</maml:name>
+          <maml:uri/>
+        </dev:type>
+        <dev:defaultValue></dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <!-- Input - Output section-->
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri/>
+          <maml:description />
+        </dev:type>
+        <maml:description>
+          <maml:para>
+            <!-- description  -->
+
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+          <maml:description />
+        </dev:type>
+        <maml:description>
+          <maml:para>
+            <!-- description  -->
+
+          </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <!-- Error section-->
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <!-- Notes section  -->
+    <maml:alertSet>
+      <maml:title></maml:title>
+      <maml:alert>
+        <maml:para>
+
+        </maml:para>
+      </maml:alert>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <!-- Example section  -->
+    <command:examples>
+
+      <command:example>
+        <maml:title>
+          -------------------------- EXAMPLE 1 --------------------------
+        </maml:title>
+        <maml:introduction>
+          <maml:para>C:\PS&gt;</maml:para>
+        </maml:introduction>
+        <dev:code>
+          Import-CrmPackage -CrmConnection $CRMConn -PackageDirectory c:\CRM\SDK\Tools\PackageDeployer -PackageName SampleCRMPackage.dll -UnpackFilesDirectory c:\UnpackedFiles -Verbose
+        </dev:code>
+        <dev:remarks>
+          <maml:para>Description</maml:para>
+          <maml:para>-----------</maml:para>
+          <maml:para>
+            This example imports a package defined by SampleCRMPackage.dll available in the c:\CRM\SDK\Tools\PackageDeployer directory. The Verbose parameter at the end of the command is optional, and is used to display a detailed log of the activities performed during the package deployment process.
+          </maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText></command:commandText>
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+
+      <command:example>
+        <maml:title>
+          -------------------------- EXAMPLE 2 --------------------------
+        </maml:title>
+        <maml:introduction>
+          <maml:para>C:\PS&gt;</maml:para>
+        </maml:introduction>
+        <dev:code>
+          Import-CrmPackage -CrmConnection $CRMConn -PackageDirectory c:\CRM\SDK\Tools\PackageDeployer -PackageName SampleCRMPackage.dll -LogWriteDirectory c:\MyLogFiles -Verbose
+        </dev:code>
+        <dev:remarks>
+          <maml:para>Description</maml:para>
+          <maml:para>-----------</maml:para>
+          <maml:para>This example specifies a custom directory, c:\MyLogFiles, to store the log files and imports a package defined by SampleCRMPackage.dll, which is available in the c:\CRM\SDK\Tools\PackageDeployer directory. The Verbose parameter at the end of the command is mandatory in order to write to a log file at a custom location. </maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+          <maml:para></maml:para>
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText></command:commandText>
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <!-- Link section  -->
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online version:</maml:linkText>
+        <maml:uri>http://go.microsoft.com/fwlink/?LinkId=397938</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+</helpItems>

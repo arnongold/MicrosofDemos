@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{769D872D-E8C0-4CC0-AB90-565C150625AB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MoiNdv.Crm.Plugins.Contact</RootNamespace>
+    <AssemblyName>MoiNdv.Crm.Plugins.Contact</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>MoiNdv.Crm.Plugins.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Xrm.Sdk">
+      <HintPath>..\..\..\CrmSdkBin\Microsoft.Xrm.Sdk.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PostCreateContact.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\01-Shared\DataModel\MoiNdv.DataModel\MoiNdv.DataModel.csproj">
+      <Project>{44167602-a612-4f48-90ef-fcde85627aa2}</Project>
+      <Name>MoiNdv.DataModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\01-Shared\Framework\MoiNdv.Framework\MoiNdv.Framework.csproj">
+      <Project>{2b56191a-ba71-4717-8986-ca8f5250ad61}</Project>
+      <Name>MoiNdv.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\03-BusinessLogic\MoiNdv.BusinessLogic\MoiNdv.BusinessLogic.csproj">
+      <Project>{33fc3c77-a344-4df1-9404-8ec168b33e95}</Project>
+      <Name>MoiNdv.BusinessLogic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MoiNdv.Crm.Plugins.snk" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>"C:\Program Files (x86)\Microsoft\ILMerge\ilmerge.exe"  /t:library /targetplatform:v4,C:\Windows\Microsoft.NET\Framework\v4.0.30319 /copyattrs /keyfile:"$(ProjectDir)MoiNdv.Crm.Plugins.snk" /out:"$(ProjectDir)bin\MoiNdv.Crm.Plugins.Contact.dll" "$(ProjectDir)$(OutDir)MoiNdv.DataModel.dll" "$(ProjectDir)$(OutDir)MoiNdv.Framework.dll" "$(ProjectDir)$(OutDir)MoiNdv.DataAccessLevel.dll" "$(ProjectDir)$(OutDir)MoiNdv.BusinessLogic.dll" "$(ProjectDir)$(OutDir)MoiNdv.Crm.Plugins.Contact.dll"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
