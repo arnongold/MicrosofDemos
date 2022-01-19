@@ -17,5 +17,11 @@ namespace DynamicsCRMDemoPlugin.DataAccess.AccountDAL
             var accountStatus = dataContext.Context.AccountSet.First(a => a.Name == accountName).StatusCode;
             return accountStatus.Value == 0;
         }
+
+        public Account GetAccountbyID(Guid id)
+        {
+            var account = dataContext.Context.AccountSet.First(a => a.AccountId == id);
+            return account;
+        }
     }
 }
